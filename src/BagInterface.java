@@ -1,4 +1,3 @@
-
 public interface BagInterface<T> {
 	
 	// return the current size of the bag, or the number of element in the bag
