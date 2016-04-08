@@ -94,20 +94,32 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	}
 	
 	
-	// TODO complete selectionSort code
+	/* Array-Based Selection Sort 
+	 * 
+	 * Takes boolean argument true-descending and
+	 * false-ascending.
+	 * 
+	 * */
+	
 	public void selectionSort(boolean x){
 		
 		for(int i = 0; i < this.numberOfEntries; i++){
 			int min = i;
 			
 			for(int j = i+1; j < this.numberOfEntries; j++){
-				System.out.println("Position is " + i);
-
-				System.out.println("comparing" + this.bag_items[i] + " to " +this.bag_items[j]);
-				
-				if(this.bag_items[i].compareTo(this.bag_items[j])>0){
-					System.out.println("SWAPPING!");		
-					swap(i,j);
+//				System.out.println("Position is " + i);
+//				System.out.println("comparing" + this.bag_items[i] + " to " +this.bag_items[j]);
+//				
+				// ascending
+				if(x == true){
+					if(this.bag_items[i].compareTo(this.bag_items[j])>0){
+						swap(i,j);
+					}					
+				}else{
+				// descending
+					if(this.bag_items[i].compareTo(this.bag_items[j])<0){
+						swap(i,j);
+					}							
 				}
 			}
 		}
@@ -119,15 +131,4 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 		this.bag_items[pos2] = temp;
 	}
 	
-//	public <T extends Comparable<T>> void sortAscending(T[] values){
-//		
-//	}
-//	public <T extends Comparable<T>> void sortDescending(T[] values){
-//		
-//	}
-	
-	
-	
-
-
 }
