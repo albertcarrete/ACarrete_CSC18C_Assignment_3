@@ -23,6 +23,7 @@ public class BagDemo {
 		bag_of_integers.add(6);
 		bag_of_integers.add(66);
 		
+		bag_of_integers.selectionSort(true);
 		System.out.println("Size of bag of strings = " + bag_of_integers.getSize());
 		System.out.println("Contents of bag_of_strings:");
 		Object[] a = bag_of_integers.toArray();
@@ -35,12 +36,13 @@ public class BagDemo {
 	
 		Bag<String> bag_of_strings = new Bag<String>(String.class);
 		
+		bag_of_strings.add("Bubble Boy");
+		bag_of_strings.add("Anchorman");
 		bag_of_strings.add("Interstellar");
-		bag_of_strings.add("Gladiator");
-		bag_of_strings.add("Ex Machina");
 		bag_of_strings.add("Ghostbusters");
 		bag_of_strings.add("Pulp Fiction");
-		bag_of_strings.add("Hateful 8");
+		bag_of_strings.add("Ex Machina");
+		bag_of_strings.selectionSort(false);
 		
 		System.out.println("Size of bag of strings = " + bag_of_strings.getSize());
 		System.out.println("Contents of bag_of_strings:");

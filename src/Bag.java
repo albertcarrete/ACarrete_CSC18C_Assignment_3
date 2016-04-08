@@ -101,30 +101,23 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 			int min = i;
 			
 			for(int j = i+1; j < this.numberOfEntries; j++){
+				System.out.println("Position is " + i);
+
 				System.out.println("comparing" + this.bag_items[i] + " to " +this.bag_items[j]);
-				this.bag_items[j].compareTo(this.bag_items[i]);
 				
+				if(this.bag_items[i].compareTo(this.bag_items[j])>0){
+					System.out.println("SWAPPING!");		
+					swap(i,j);
+				}
 			}
-			
 		}
 	}
 	
-	// Function that compares first two values, just a tester
-	public void selectionSort(){
-		
-		
-		if(bag_items[0].compareTo(bag_items[1])>0){
-			System.out.println("Entry [0]:" + arrCopy[0] + " is greater than " + "Entry[1]:" + arrCopy[1]);
-		}
-		
-
+	private void swap(int pos1, int pos2){
+		T temp = this.bag_items[pos1];
+		this.bag_items[pos1] = this.bag_items[pos2];
+		this.bag_items[pos2] = temp;
 	}
-	
-	
-
-	
-
-	
 	
 //	public <T extends Comparable<T>> void sortAscending(T[] values){
 //		
