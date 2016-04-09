@@ -131,4 +131,146 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 		this.bag_items[pos2] = temp;
 	}
 	
+	
+	public void mergeSort(boolean x){
+		if(this.numberOfEntries > 1){
+			
+			T[] mergeArray = copyArray(this.bag_items);
+			displayArray(mergeArray);
+			mergeSort(mergeArray);
+			displayArray(mergeArray);
+
+		}
+	}
+	
+	private void mergeSort(T[] a){
+		
+		if(a.length <=1){
+//			System.out.println("reached 1");
+			return;
+		}else{
+			
+			int middle = (int)a.length / 2;
+//			System.out.println("MIDDLE IS " + middle);
+			
+			T[] left 	= copyArray(a,0,a.length-middle);
+			T[] right 	= copyArray(a,(a.length - middle), a.length);
+//			System.out.println("");
+//			displayArray(left);
+//			System.out.println("");
+//			displayArray(right);
+//			System.out.println("");
+//			System.out.println("");
+
+			mergeSort(left);
+			mergeSort(right);
+			merge(left,right,a);			
+		}	
+	}
+	
+	private void merge(T[]left, T[]right, T[]result){
+		
+		int posLeft = 0;
+		int posRight = 0;
+		int posResult = 0;
+
+		System.out.println("MERGING FOLLOWING SECTIONS:");
+		System.out.print("Left: "); displayArray(left);
+		System.out.print("Right: "); displayArray(right);
+		System.out.print("Result: "); displayArray(result);
+
+		System.out.println("======================");
+
+
+		while(posLeft < left.length || posRight < right.length){
+			System.out.println("posLeft " + posLeft + " / " + left.length);
+			System.out.println("posRight " + posRight + " / " + right.length);
+
+
+			
+			// if right is completed, just pass in left
+			if(posRight >= right.length){
+				result[posResult] = left[posLeft];
+				posLeft++;
+			}
+			// if left is used up, just pass in right
+			else if(posLeft >= left.length){
+				result[posResult] = right[posRight];
+				posRight++;				
+			}else{
+				if((left[posLeft].compareTo(right[posRight])<0)){
+					System.out.println("LEFT");
+					result[posResult] = left[posLeft];
+					posLeft++;
+				}else{
+					System.out.println("RIGHT");
+					result[posResult] = right[posRight];
+					posRight++;
+				}
+			}
+			
+
+			posResult++;
+			
+		}
+		System.out.println("======================");
+		System.out.println("RESULTING ARRAY");
+		displayArray(result);
+		System.out.println("**** **** **** ****");
+		
+	}
+	@SuppressWarnings("unchecked")	
+	private T[] copyArray(T[]a){
+		
+		int validSize = 0;
+		
+		for(int i = 0; i < a.length; i++){
+			if(a[i] == null){
+				break;
+			}else{
+				validSize++;
+			}
+		}
+		T[]b = (T[]) Array.newInstance(this.clazz,validSize);
+
+		for(int i = 0; i < validSize; i++){
+			b[i] = a[i];
+		}
+		
+		return b;
+	}
+	@SuppressWarnings("unchecked")
+	private T[] copyArray(T[]a,int start, int end){
+		
+		
+		T[]b = (T[]) Array.newInstance(this.clazz,end-start);
+		
+//		System.out.println("The input array length is " + a.length);
+//		System.out.println("Start point is " + start);
+//		System.out.println("End point is " + end);
+//
+//		System.out.println("The copy array length is " + b.length);
+
+		if(end-start == 0){
+			b[0] = a[0];
+		}else{
+			for(int i = 0; i < end-start; i++){
+//				System.out.println("b[" + i + "] = " + b[i] + " | a[" + (start+i) + "] = " + a[i]);
+
+				b[i] = a[start+i];
+			}			
+		}
+
+		
+		return b;
+	}
+	
+	private void displayArray(T[]a){
+		for(int i = 0; i < a.length; i++){
+			System.out.print(a[i] + " ");
+		}		
+		System.out.println("");
+	}
+	
+	
 }

@@ -16,14 +16,18 @@ public class BagDemo {
 		
 		Bag<Integer> bag_of_integers = new Bag<Integer>(Integer.class);
 		
-		bag_of_integers.add(14);
+		bag_of_integers.add(45);
 		bag_of_integers.add(23);
 		bag_of_integers.add(53);
 		bag_of_integers.add(34);
 		bag_of_integers.add(6);
 		bag_of_integers.add(66);
-		
-		bag_of_integers.selectionSort(true);
+		bag_of_integers.add(21);
+		bag_of_integers.add(44);
+		bag_of_integers.add(78);
+		bag_of_integers.add(4);
+
+		bag_of_integers.mergeSort(true);
 		System.out.println("Size of bag of strings = " + bag_of_integers.getSize());
 		System.out.println("Contents of bag_of_strings:");
 		Object[] a = bag_of_integers.toArray();
@@ -42,7 +46,7 @@ public class BagDemo {
 		bag_of_strings.add("Ghostbusters");
 		bag_of_strings.add("Pulp Fiction");
 		bag_of_strings.add("Ex Machina");
-		bag_of_strings.selectionSort(false);
+//		bag_of_strings.selectionSort(false);
 		
 		System.out.println("Size of bag of strings = " + bag_of_strings.getSize());
 		System.out.println("Contents of bag_of_strings:");
