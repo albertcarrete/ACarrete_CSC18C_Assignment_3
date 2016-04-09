@@ -111,12 +111,6 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 		}
 	}
 	
-	private void swap(T[]a, int pos1, int pos2){
-		T temp = a[pos1];
-		a[pos1] = a[pos2];
-		a[pos2] = temp;
-	}
-	
 	/* Array-Based Merge Sort 
 	 * 
 	 * Takes boolean argument true-ascending and
@@ -206,6 +200,50 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 //		System.out.println("**** **** **** ****");
 		
 	}
+	/* Array-Based Bubble Sort 
+	 * 
+	 * Takes boolean argument true-ascending and
+	 * false-descending.
+	 * 
+	 * */	
+	public T[] bubbleSort(boolean x){
+		if(this.numberOfEntries > 1){
+			T[] bubbleArray = copyArray(this.bag_items);
+			bubbleSort(bubbleArray,x);
+			return bubbleArray;
+		}
+		return this.bag_items;
+	}
+	
+	public void bubbleSort(T[]a, boolean x){
+		
+		boolean progress = true;
+		
+		while(progress){
+			progress=false;
+			for(int i = 0; i < a.length-1; i++){
+				
+				if(x){
+					if(a[i].compareTo(a[i+1])>0){
+						swap(a,i,i+1);
+						progress = true;
+					}					
+				}else{
+					if(a[i].compareTo(a[i+1])<0){
+						swap(a,i,i+1);
+						progress = true;
+					}						
+				}	
+			}	
+		}	
+	}
+	private void swap(T[]a, int pos1, int pos2){
+		T temp = a[pos1];
+		a[pos1] = a[pos2];
+		a[pos2] = temp;
+	}
+	
+	
 	@SuppressWarnings("unchecked")	
 	private T[] copyArray(T[]a){
 		
