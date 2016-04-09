@@ -101,92 +101,87 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	 * 
 	 * */
 	
-	public void selectionSort(boolean x){
+	public T[] selectionSort(boolean x){
+		T[] selectionArray = copyArray(this.bag_items);
+		selectionSort(selectionArray,x);
+		return selectionArray;
+	}
+	private void selectionSort(T[]a, boolean x){
 		
 		for(int i = 0; i < this.numberOfEntries; i++){
-			int min = i;
 			
 			for(int j = i+1; j < this.numberOfEntries; j++){
 //				System.out.println("Position is " + i);
 //				System.out.println("comparing" + this.bag_items[i] + " to " +this.bag_items[j]);
 //				
 				// ascending
-				if(x == true){
-					if(this.bag_items[i].compareTo(this.bag_items[j])>0){
-						swap(i,j);
+				if(x){
+					if(a[i].compareTo(a[j])>0){
+						swap(a,i,j);
 					}					
 				}else{
 				// descending
-					if(this.bag_items[i].compareTo(this.bag_items[j])<0){
-						swap(i,j);
+					if(a[i].compareTo(a[j])<0){
+						swap(a,i,j);
 					}							
 				}
 			}
 		}
 	}
 	
-	private void swap(int pos1, int pos2){
-		T temp = this.bag_items[pos1];
-		this.bag_items[pos1] = this.bag_items[pos2];
-		this.bag_items[pos2] = temp;
+	private void swap(T[]a, int pos1, int pos2){
+		T temp = a[pos1];
+		a[pos1] = a[pos2];
+		a[pos2] = temp;
 	}
 	
-	
-	public void mergeSort(boolean x){
+	/* Array-Based Merge Sort 
+	 * 
+	 * Takes boolean argument true-ascending and
+	 * false-descending.
+	 * 
+	 * */	
+	public T[] mergeSort(boolean x){
 		if(this.numberOfEntries > 1){
-			
 			T[] mergeArray = copyArray(this.bag_items);
-			displayArray(mergeArray);
-			mergeSort(mergeArray);
-			displayArray(mergeArray);
-
+			mergeSort(mergeArray,x);
+			return mergeArray;
 		}
+		return this.bag_items;
 	}
 	
-	private void mergeSort(T[] a){
+	private void mergeSort(T[] a,boolean x){
 		
 		if(a.length <=1){
-//			System.out.println("reached 1");
 			return;
 		}else{
 			
 			int middle = (int)a.length / 2;
-//			System.out.println("MIDDLE IS " + middle);
 			
 			T[] left 	= copyArray(a,0,a.length-middle);
 			T[] right 	= copyArray(a,(a.length - middle), a.length);
-//			System.out.println("");
-//			displayArray(left);
-//			System.out.println("");
-//			displayArray(right);
-//			System.out.println("");
-//			System.out.println("");
 
-			mergeSort(left);
-			mergeSort(right);
-			merge(left,right,a);			
+			mergeSort(left,x);
+			mergeSort(right,x);
+			merge(left,right,a,x);			
 		}	
 	}
 	
-	private void merge(T[]left, T[]right, T[]result){
+	private void merge(T[]left, T[]right, T[]result,boolean x){
 		
 		int posLeft = 0;
 		int posRight = 0;
 		int posResult = 0;
 
-		System.out.println("MERGING FOLLOWING SECTIONS:");
-		System.out.print("Left: "); displayArray(left);
-		System.out.print("Right: "); displayArray(right);
-		System.out.print("Result: "); displayArray(result);
-
-		System.out.println("======================");
+//		System.out.println("MERGING FOLLOWING SECTIONS:");
+//		System.out.print("Left: "); displayArray(left);
+//		System.out.print("Right: "); displayArray(right);
+//		System.out.print("Result: "); displayArray(result);
+//
+//		System.out.println("======================");
 
 
 		while(posLeft < left.length || posRight < right.length){
-			System.out.println("posLeft " + posLeft + " / " + left.length);
-			System.out.println("posRight " + posRight + " / " + right.length);
-
-
 			
 			// if right is completed, just pass in left
 			if(posRight >= right.length){
@@ -198,25 +193,35 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 				result[posResult] = right[posRight];
 				posRight++;				
 			}else{
-				if((left[posLeft].compareTo(right[posRight])<0)){
-					System.out.println("LEFT");
-					result[posResult] = left[posLeft];
-					posLeft++;
+				// Ascending, descending selector
+				if(x){
+					if((left[posLeft].compareTo(right[posRight])<0)){
+						result[posResult] = left[posLeft];
+						posLeft++;
+					}else{
+						result[posResult] = right[posRight];
+						posRight++;
+					}					
 				}else{
-					System.out.println("RIGHT");
-					result[posResult] = right[posRight];
-					posRight++;
+					if((left[posLeft].compareTo(right[posRight])>0)){
+						result[posResult] = left[posLeft];
+						posLeft++;
+					}else{
+						result[posResult] = right[posRight];
+						posRight++;
+					}					
 				}
+
 			}
 			
 
 			posResult++;
 			
 		}
-		System.out.println("======================");
-		System.out.println("RESULTING ARRAY");
-		displayArray(result);
-		System.out.println("**** **** **** ****");
+//		System.out.println("======================");
+//		System.out.println("RESULTING ARRAY");
+//		displayArray(result);
+//		System.out.println("**** **** **** ****");
 		
 	}
 	@SuppressWarnings("unchecked")	
