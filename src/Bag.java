@@ -6,29 +6,11 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	
 	private T[] bag_items;
 	private int numberOfEntries;	
-	private List<T> list;
-	private T[] arrCopy;
+
 	Class <T> clazz;
 	
-	// Parameter-less constructor not allowed
-	@SuppressWarnings("unchecked")
-	public Bag(){
-		
-//		bag_items = (T[])Array.newInstance(clazz,10);
-		// Arrays are covariant, they retain the type of their elements at runtime
-		// while Java's generics do not. In order to work around this issue we can
-		// use either Array.newInstance() or make use of Lists. 
-		
-		bag_items = (T[])new Object[10]; // default 10 item bag
-		list = new ArrayList<T> (10);
-		System.out.println(Bag.class);
-		
-		this.numberOfEntries = 0;
-		
-//		@SuppressWarnings("unchecked")
-////		arrCopy = (T[]) Array.newInstance(bag_items.getClass().getComponentType(), 10);
-		
-	}
+	// Parameter-less constructor not allowed, omitted
+	
 	@SuppressWarnings("unchecked")
 	public Bag(Class<T> clazz){
 		this.clazz = clazz;

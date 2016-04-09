@@ -57,7 +57,29 @@ public class BagDemo {
 		displayArray("Original",string_array);
 		displayArray("Selection Sort",string_selection);
 		displayArray("Merge Sort",string_merge);
-						
+
+		
+		// Bag of Strings
+		
+		Bag<Float> bag_of_floats = new Bag<Float>(Float.class);
+		
+		bag_of_floats.add(0.4f);
+		bag_of_floats.add(23.1f);
+		bag_of_floats.add(55.3f);
+		bag_of_floats.add(9.3f);
+		bag_of_floats.add(11.2f);
+		bag_of_floats.add(3.3f);
+		System.out.println("Size of bag of floats = " + bag_of_floats.getSize());
+
+		
+		Object[] float_array = bag_of_floats.toArray();
+		Object[] float_selection = bag_of_floats.selectionSort(true);
+		Object[] float_merge = bag_of_floats.mergeSort(true);
+
+		displayArray("Original",float_array);
+		displayArray("Selection Sort",float_selection);
+		displayArray("Merge Sort",float_merge);
+		
 	}
 	
 	public static void displayArray(Object[] a){
