@@ -1,6 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	
@@ -11,12 +10,15 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	
 	// Parameter-less constructor not allowed, omitted
 	
+	// Single parameter instructor that takes in the type 
 	@SuppressWarnings("unchecked")
 	public Bag(Class<T> clazz){
 		this.clazz = clazz;
 		bag_items = (T[]) Array.newInstance(this.clazz, 10);
 		
 	}
+	// Two parameter constructor that takes in the type
+	// and the starting size of the array. 
 	@SuppressWarnings("unchecked")
 	public Bag(Class<T> clazz, int startSize){
 		this.clazz = clazz;
@@ -90,23 +92,25 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	}
 	private void selectionSort(T[]a, boolean x){
 		
-		for(int i = 0; i < this.numberOfEntries; i++){
-			
-			for(int j = i+1; j < this.numberOfEntries; j++){
-//				System.out.println("Position is " + i);
-//				System.out.println("comparing" + this.bag_items[i] + " to " +this.bag_items[j]);
-//				
+		for(int i = 0; i < a.length - 1; i++){
+			// Store minimum index iterator
+			int min = i;	
+			for(int j = i+1; j < a.length; j++){
 				// ascending
 				if(x){
-					if(a[i].compareTo(a[j])>0){
-						swap(a,i,j);
+					if(a[j].compareTo(a[min])<0){
+						min = j;
 					}					
 				}else{
 				// descending
-					if(a[i].compareTo(a[j])<0){
-						swap(a,i,j);
+					if(a[j].compareTo(a[min])>0){
+						min = j;
 					}							
 				}
+			}
+			// after loop swap values
+			if(min != i){
+				swap(a,i,min);
 			}
 		}
 	}
@@ -159,7 +163,7 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 
 		while(posLeft < left.length || posRight < right.length){
 			
-			// if right is completed, just pass in left
+			// if right is used up, just pass in left
 			if(posRight >= right.length){
 				result[posResult] = left[posLeft];
 				posLeft++;
@@ -219,16 +223,20 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 		
 		boolean progress = true;
 		
+		// Run through this while loop until no swaps are performed
 		while(progress){
 			progress=false;
+			// Loop through array
 			for(int i = 0; i < a.length-1; i++){
 				
 				if(x){
+					// swap if greater than
 					if(a[i].compareTo(a[i+1])>0){
 						swap(a,i,i+1);
 						progress = true;
 					}					
 				}else{
+					// swap if less than
 					if(a[i].compareTo(a[i+1])<0){
 						swap(a,i,i+1);
 						progress = true;
@@ -237,6 +245,10 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 			}	
 		}	
 	}
+	
+	/* Swap function that takes in an array and two positions
+	 * and swaps the two positions. */
+	
 	private void swap(T[]a, int pos1, int pos2){
 		T temp = a[pos1];
 		a[pos1] = a[pos2];
