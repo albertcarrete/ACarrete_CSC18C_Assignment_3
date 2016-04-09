@@ -5,7 +5,6 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 	
 	private T[] bag_items;
 	private int numberOfEntries;	
-
 	Class <T> clazz;
 	
 	// Parameter-less constructor not allowed, omitted
@@ -297,8 +296,6 @@ public class Bag<T extends Comparable<T>> implements BagInterface<T>{
 				b[i] = a[start+i];
 			}			
 		}
-
-		
 		return b;
 	}
 	
